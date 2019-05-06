@@ -1,28 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrap. cdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+        <meta charset="utf-8">
         <title>Monoku</title>
     </head>
     <body>
         <h1>Inventario MONOKU ! </h1>
+        <img src="{% static "img/background.gif" %}" alt="My image">
         <div>
 
-            <h1><a href = "/" > Participante </a></h1 >
+            {% block content %}
+            <h1>Inventario! </h1>
+            <form method="POST" class="post-form">
+                {% csrf_token %} 
 
-            <select>
-                {% for participante in participantes %} 
-                    <option> {{ participante.nombre }} </option>
-                {% endfor %} 
-            </select>
-
-            <h1><a href = "/" > Producto </a></h1 >
-
-            <select>
-                {% for producto in productos %} 
-                    <option> {{ producto.nombreproducto }} </option>
-                {% endfor %} 
-            </select>
-
+                {{ form.as_p }}
+                <button type="submit" class="save btn btn-default">Guardar</button>
+            </form>
+            {% endblock %}
         </div >
     </body>
 </html>
