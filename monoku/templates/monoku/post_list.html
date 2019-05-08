@@ -7,16 +7,19 @@
         <link rel="stylesheet" href="{% static 'css/style.css'%}">
 
         <meta charset="utf-8">
-        <title>Monoku</title>
+        <title>Monoku, {{milena}} </title>
     </head>
     <body>
-        <h1>Inventario MONOKU ! </h1>
-        <img src="{% static "img/background.gif" %}" alt="My image">
-        <div>
+        <h1>Inventario MONOKU ! {{milena}} </h1> 
 
+        <img src="{% static "img/background.gif" %}" alt="Monoku">
+        <div>
             {% block content %}
-            <h1>Inventario! </h1>
+            <h1> Galguerias {{cantidad_producto}} </h1>
+            <h1>{{nombre_participante}}</h1>
+            <h1>{{producto_consumido}}</h1>
             <form method="POST" class="post-form">
+
                 {% csrf_token %} 
 
                 {{ form.as_p }}
