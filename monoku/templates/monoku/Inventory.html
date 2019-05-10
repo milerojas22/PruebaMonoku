@@ -10,30 +10,23 @@
         <title>Monoku</title>
     </head>
     <body>
-        <h1>Inventario MONOKU !</h1> 
+        <h1>Inventario</h1> 
 
-
-        <img src="{% static "img/background.gif" %}" alt="Monoku">
         <div>
-
             {% block content %}
 
-                <h3>Productos consumidos: {{cantidad_producto}} </h3> 
+            <ul>
+                {% for producto in nombreproducto %}
 
 
+                    <h1> {{producto }}</h1>
+                    <p>{{producto.cantidad }}</P>
+                    <P>{{producto.fechavencimiento}}</P>
 
-                <form method="POST" class="post-form">
-
-                {% csrf_token %} 
-
-                {{ form.as_p }}
-                <button type="submit" class="save btn btn-default">Guardar</button>
-
-
+                {% endfor %}
+            </ul>
+            
             {% endblock %}
-            </form>
-
         </div >
     </body>
 </html>
-

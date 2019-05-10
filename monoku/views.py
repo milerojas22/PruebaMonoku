@@ -3,11 +3,11 @@ from .models import Participante
 from .models import Producto
 from .models import Productosconsumido
 from .forms import Productosconsumidoform
+from .forms import InventarioFinalform
 from django.http import HttpResponse
 
 
 def productosconsumidos(request):
-    nombre='Julian'
 
     if request.method == "POST":
         form = Productosconsumidoform(request.POST)
@@ -22,16 +22,34 @@ def productosconsumidos(request):
     nombre_participante = ultimo_producto.nombre
     producto_consumido = ultimo_producto.nombreproducto
 
-    return render(request, 'monoku/post_list.html', {'form': form, 'milena':nombre, 
+    return render(request, 'monoku/post_list.html', {'form': form, 
         'cantidad_producto':cantidad_producto, 
         'nombre_participante':nombre_participante,
         'producto_consumido':producto_consumido})
 
-# def listado_productos_consumidos(request):
+def listado_productos_consumidos(request):
+
+    if request.method == "POST":
+        form2 = InventarioFinalform(request.POST)
+        if form.is_valid():
+            producto = form2.save()
+            form2 = InventarioFinalform()
+    else:
+        form = InventarioFinalform()
+
+    nombreproducto = list(Producto.objects.all())
+    cantidad = list(Producto.objects.all())
+    fechavencimiento = list(Producto.objects.all())
+
+
+    return render(request, 'monoku/Inventory.html', {'form2': form, 
+        'nombreproducto':nombreproducto, 
+        'cantidad':cantidad,
+        'fechavencimiento':fechavencimiento})
+
+
 
     
-
-
 
 
 
