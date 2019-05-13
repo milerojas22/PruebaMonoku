@@ -14,11 +14,24 @@
 
 
         <img src="{% static "img/background.gif" %}" alt="Monoku">
+
+        <div style="font-size:30px">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+        </div>
         <div>
 
             {% block content %}
 
                 <h3>Productos consumidos: {{cantidad_producto}} </h3> 
+                <h3>Nomlbre de quien lo consumio: {{nombre_participante}}</h3> 
+                <h3>Productos consumidos: {{producto_consumido}}</h3>
 
 
 
@@ -29,11 +42,16 @@
                 {{ form.as_p }}
                 <button type="submit" class="save btn btn-default">Guardar</button>
 
+                <a href="inventario/"> Inventario </a>
+
+
 
             {% endblock %}
             </form>
 
         </div >
+
+
     </body>
 </html>
 
