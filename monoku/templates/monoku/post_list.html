@@ -2,21 +2,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrap. cdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/style.css'%}">
-
         <meta charset="utf-8">
         <title>Monoku</title>
     </head>
     <body>
-
-        <h1>Inventario MONOKU !</h1> 
-            {% block content %}
-        <div>
-
-          
-
+        {% block content %}
+            <h1>Inventario MONOKU !</h1> 
+            <div>
                 {% if messages %}
                     <ul class="messages">
                     {% for message in messages %}
@@ -25,27 +17,19 @@
                     </ul>
                 {% endif %}
 
-
-
-
-
                 <form method="POST" class="post-form">
 
-                {% csrf_token %} 
+                    {% csrf_token %} 
 
-                {{ form.as_p }}
-                <button type="submit" class="save btn btn-default">Guardar</button>
+                    {{ form.as_p }}
+                    <button type="submit" class="save btn btn-default">Guardar</button>
 
-                <a href="/"> Inventario </a>
+                    <a href="/"> Inventario </a>
+                </form>
+        
 
-
-
-            {% endblock %}
-            </form>
-
-        </div >
-
-
+            </div >
+        {% endblock %}
     </body>
 </html>
 
