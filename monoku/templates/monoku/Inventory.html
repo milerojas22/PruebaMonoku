@@ -6,23 +6,20 @@
         <title>Monoku</title>
     </head>
     <body>
+        {% block content %}
         <h1>Inventario</h1> 
 
         <div>
-            {% block content %}
-
             <ul>
                 {% for producto in nombreproducto %}
-
-
-                    <h1> {{producto }}</h1>
-                    <p>{{producto.cantidad }}</P>
-                    <P>{{producto.fechavencimiento}}</P>
+                    <h1> Nombre: {{producto}}</h1>
+                    <p>Cantidad en inventario: {{producto.cantidad}}</P>
+                    <P>Fecha de vencimiento: {{producto.fechavencimiento}}</P>
 
                 {% endfor %}
             </ul>
             <a href="comer/"> Monoku </a>
-            {% endblock %}
         </div >
+        {% endblock %}
     </body>
 </html>
