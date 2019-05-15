@@ -3,22 +3,31 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Monoku</title>
+        <title>Inventario Monoku</title>
     </head>
     <body>
         {% block content %}
         <h1>Inventario</h1> 
-
+        <a href="comer/"> Vamos a comer! </a>
+        <br> 
+        <br> 
+        <img src="static/img/background.gif" border="1" alt="Monoku" width="400" height="300">
+        <br>
+        <br>
+        <div>
+            <h1>Persona de mayor consumo: {{mayor}}</h1>
+            <h1>Producto que mas se consume: {{product}}</h1>
+        </div>
         <div>
             <ul>
                 {% for producto in nombreproducto %}
                     <h1> Nombre: {{producto}}</h1>
-                    <p>Cantidad en inventario: {{producto.cantidad}}</P>
+                    <p>Cantidad en disponible: {{producto.cantidad}}</P>
                     <P>Fecha de vencimiento: {{producto.fechavencimiento}}</P>
 
                 {% endfor %}
             </ul>
-            <a href="comer/"> Monoku </a>
+            <a href="comer/"> Vamos a comer! </a>
         </div >
         {% endblock %}
     </body>

@@ -10,36 +10,28 @@ from django.contrib import messages
 
 
 def productosconsumidos(request):
-
     if request.method == "POST":
         form = Productosconsumidoform(request.POST)
-
         if form.is_valid():
             if form.cleaned_data['nombreproducto'].cantidad >= form.cleaned_data['cantidadconsumida']:
                 productosconsumidos = form.save()
                 productosconsumidos.nombreproducto.cantidad -= productosconsumidos.cantidadconsumida
                 productosconsumidos.nombreproducto.save()
                 form = Productosconsumidoform()
-
             else:
                 messages.add_message(request, messages.INFO, 'Producto agotado')
     else:
         
         form = Productosconsumidoform()
-
     cantidad_producto = Productosconsumido.objects.aggregate(total_sum=Sum('cantidadconsumida'))
     ultimo_producto = Productosconsumido.objects.last()
     nombre_participante = ultimo_producto.nombre
     producto_consumido = ultimo_producto.nombreproducto
 
-
-
     return render(request, 'monoku/post_list.html', {'form':form,
         'cantidad_producto':cantidad_producto['total_sum'],
         'nombre_participante':nombre_participante,
         'producto_consumido':producto_consumido})
-
-
 
 def listado_productos_consumidos(request):
 
@@ -54,17 +46,27 @@ def listado_productos_consumidos(request):
     nombreproducto = list(Producto.objects.all())
     cantidad = list(Producto.objects.all())
     fechavencimiento = list(Producto.objects.all())
+    mayor = mayor_consumo_persona()
+    product = mayor_consumo_producto()
 
-
-    return render(request, 'monoku/Inventory.html', {'form2': form, 
+    return render(request, 'monoku/Inventory.html', {'form': form, 
         'nombreproducto':nombreproducto, 
         'cantidad':cantidad,
-        'fechavencimiento':fechavencimiento})
+        'fechavencimiento':fechavencimiento,
+        'mayor':mayor,
+        'product':product})
 
+def mayor_consumo_persona():
 
+    mayor = Productosconsumido.objects.values('nombre__nombre').annotate(Sum('cantidadconsumida')).order_by('-cantidadconsumida__sum').first()
 
-    
+    return mayor['nombre__nombre']
 
+def mayor_consumo_producto():
+
+    productoconsu = Productosconsumido.objects.values('nombreproducto__nombreproducto').annotate(Sum('cantidadconsumida')).order_by('-cantidadconsumida__sum').first()
+
+    return productoconsu['nombreproducto__nombreproducto']
 
 
 

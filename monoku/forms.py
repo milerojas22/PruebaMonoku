@@ -18,3 +18,5 @@ class InventarioFinalform(forms.ModelForm):
         fields = ('nombreproducto','cantidad','fechavencimiento')
 
 
+
+

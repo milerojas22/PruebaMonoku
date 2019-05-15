@@ -3,14 +3,14 @@ from django.utils import timezone
 
 
 class Participante(models.Model):
-    nombre = models.CharField(max_length=140, default="")
+    nombre = models.CharField(max_length=140)
 
 
     def __str__(self):
         return self.nombre
 
 class Producto(models.Model):
-    nombreproducto = models.CharField(max_length=140, default="")
+    nombreproducto = models.CharField(max_length=140)
     cantidad = models.IntegerField(default=0)
     fechavencimiento = models.DateField()
 
@@ -24,3 +24,4 @@ class Productosconsumido(models.Model):
 
     def __str__(self):
         return str(self.cantidadconsumida)
+
